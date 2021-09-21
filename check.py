@@ -32,6 +32,9 @@ def get_minimum_data(data):
 def new_simulation(period, data):
     sb = SimulationBuilder()
     ofdl = CountryTaxBenefitSystem()
+    print("+++", ofdl.parameters('2020').dotation_solidarite_rurale)
+    print("+++", ofdl.parameters('2020').dotation_solidarite_rurale.augmentation_montant)
+    print("+++", ofdl.parameters.dotation_solidarite_rurale.augmentation_montant)
     return simulation_from_dgcl_csv(period, data, ofdl)
 
 
@@ -81,8 +84,22 @@ data_adapted_min = get_minimum_data(data)
 period = 2021
 simulation = new_simulation(period, data_adapted)
 dsu_montant_eligible = simulation.calculate('dsu_montant_eligible', period)
+dsu_montant = simulation.calculate('dsu_montant', period)
 
 strate_0_data = get_strate_0(data_adapted_min)
 strate_1_data = get_strate_1(data_adapted_min)
 strate_2_data = get_strate_2(data_adapted_min)
 
+
+# communes sortantes de la DSU (baisse de population)
+# dsu_strate_0 = strate_0_data['Dotation de solidarité urbaine - Montant total réparti']
+# print(strate_0_data[dsu_strate_0 > 0])
+
+communes_perdant_eligibilite_2020 = 0
+garantie_dsr_2020_dgcl = 0
+garantie_dsr_2020_calculee = 0
+montant_dsr_reference_garanties_2019_dgcl = 0
+montant_dsr_reference_garanties_2019_calcule = 0
+
+# DSU
+# 'Dotation de solidarité urbaine - Montant de la garantie effectivement appliquée à la commune': 'dsu_montant_garantie_non_eligible',
