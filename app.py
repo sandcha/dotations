@@ -72,7 +72,7 @@ app.css.append_css({"external_url": "https://codepen.io/chriddyp/pen/bWLwgP.css"
 
 # <link rel="stylesheet" type="text/css" href="/css/main.css">
 app.layout = html.Div(children=[
-    html.H1(children=str(len(communes_ids)) + ' communes'),
+    html.H1(children=str(len(communes_ids)) + ' communes en 2019'),
     
     html.Div(children=[
         html.H2(children='DSU'),
